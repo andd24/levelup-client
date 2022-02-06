@@ -6,6 +6,16 @@ export const getGames = () => {
     })
         .then(response => response.json())
 }
+
+export const getGameById = (gameId) => {
+    return fetch(`http://localhost:8000/games/${gameId}`, {
+        headers:{
+            "Authorization": `Token ${localStorage.getItem("lu_token")}`
+        }
+    })
+        .then(response => response.json())
+}
+
 export const createGame = (game) => {
     return fetch("http://localhost:8000/games", {
         method: "POST",
@@ -18,6 +28,18 @@ export const createGame = (game) => {
         .then(getGames)
 }
 
+export const updateGame = game => {
+    return fetch(`http://localhost:8000/games/${game.id}`, {
+        method: "PUT",
+        headers:{
+            "Content-Type": "application/json",
+            "Authorization": `Token ${localStorage.getItem("lu_token")}`
+        },
+        body: JSON.stringify(game)
+    })
+        .then(getGames)
+}
+
 export const getGameTypes = () => {
     return fetch("http://localhost:8000/gametypes", {
         headers:{
@@ -25,4 +47,14 @@ export const getGameTypes = () => {
         }
      })
         .then(response => response.json())
+}
+
+export const deleteGame = (gameId) => {
+    return fetch(`http://localhost:8000/games/${gameId}`, {
+        method: "DELETE",
+        headers:{
+            "Authorization": `Token ${localStorage.getItem("lu_token")}`
+        }
+    })
+        .then(getGames)
 }

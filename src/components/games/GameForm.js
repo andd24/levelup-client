@@ -13,19 +13,6 @@ export const GameForm = () => {
     const history = useHistory()
     const [gameTypes, setGameTypes] = useState([])
 
-    /*
-        Since the input fields are bound to the values of
-        the properties of this state variable, you need to
-        provide some default values.
-    */
-    // const [currentGame, setCurrentGame] = useState({
-    //     skillLevel: 1,
-    //     numberOfPlayers: 0,
-    //     title: "",
-    //     maker: "",
-    //     gameTypeId: 0
-    // })
-
     useEffect(() => {
         getGameTypes().then(data => setGameTypes(data))
     }, [])
@@ -48,7 +35,7 @@ export const GameForm = () => {
                 skill_level: parseInt(skillLevel.current.value),
                 game_type: parseInt(gameType.current.value),
             })
-            .then(() => history.push("/"))
+            .then(() => history.push("/games"))
         }
     }
     // const changeGameState = (domEvent) => {
